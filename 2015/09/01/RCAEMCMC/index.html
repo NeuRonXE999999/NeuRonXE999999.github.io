@@ -14,7 +14,8 @@
 <meta property="og:site_name" content="neuRonXe's Blog">
 <meta property="og:description" content="##前言
 第一次写这个文章的时候，是在读过了神网大神之一（确切来说是DL大神之一）——Yoshua Bengio还未出版的Deep Learning之后有感而发。自那以后到现在，已经整整半年，大神的草稿也已经成了……更长的草稿。当时读过的那一章，The Manifold Perspective on Auto-Encoders，在05/19的更新里已经被扩充成了三章： Linear Factor">
-<meta property="og:updated_time" content="2015-09-01T18:02:20.000Z">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=d/0B9_Jak1oUX5GMFJJRG5lLWp5SGc">
+<meta property="og:updated_time" content="2016-08-15T19:37:05.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RCAE & MCMC">
 <meta name="twitter:description" content="##前言
@@ -119,6 +120,7 @@
 <p>我们都知道RBM是一种概率模型，即它的推断和估计都必须通过抽样。虽然这给模型的解释性造成了困难，但如果学习目标就是一个概率分布，RBM理论上是可以拟合任意分布的。而反观AE，它是确定性的模型，解释起来要方便得多，但如果我们没办法从学到的分布中取样。而YB大神的另一个重要结论就是，DAE学习到的，其实就是生成样本的对数概率密度的导数：</p>
 <p>$$r(x)=x+\sigma^2\frac{\partial\mathrm{log}(x)}{\partial x}+o(\sigma^2) \rightarrow \frac{r(x)-x}{\sigma^2}=\frac{\partial\mathrm{log}(x)}{\partial x}$$</p>
 <p>这也就是说，通过充分训练的DAE，我们可以精确估计对数概率密度的导数。也就是小标题说的”轨点“了（轨点是梯度的英文音译，感觉和绩点GPA一样……出国党伤不起，这都能联系起来）。这就和MCMC联系了起来。这里YB大神还画了一个Vector Fields的图，训练的样本数据来自经典的Swiss Roll，训练的结果就好像attractor吸引子一样，无数向量都指向Swiss Roll，感觉非常漂亮！</p>
+<p><img src="https://drive.google.com/uc?export=view&amp;id=d/0B9_Jak1oUX5GMFJJRG5lLWp5SGc" alt="Vector Fields of Denoising Autoencoder"></p>
 <p>回忆经典的MH算法：根据细致平稳条件，假设我们能得到密度函数的比值$\frac{p(x^s)}{p(x)}$，再利用一个对称的预选分布$q(x^s|x)$，我们能利用MH算法取得$p(x)$的样本。换句话说，我们的任务就是设法得到$\frac{p(x^s)}{p(x)}$。下面详细讨论这一个问题：</p>
 <p>$\frac{p(x^s)}{p(x)}$可以写成$e^{\mathrm{log}p(x^s)-\mathrm{log}p(x)}$，而 $\mathrm{log}p(x^s)-\mathrm{log}p(x)$ 进行一阶泰勒展开得到：<br>$$\mathrm{log}p(x^s)-\mathrm{log}p(x)=\frac{\partial\mathrm{log}(x)}{\partial x}(x^s-x)+o(x^s-x)$$</p>
 <p>根据前面的结论我们知道利用DAE可以计算导数。因此，DAE可以根据这个方法构造MH（或者用Hamilton的方法构造HMC）抽样。</p>
@@ -136,7 +138,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/09/01/RCAEMCMC/" data-id="cirvkgwzj0001n8v25go018sz" class="article-share-link" data-share="baidu" data-title="RCAE &amp; MCMC">Share</a>
+        <a data-url="http://yoursite.com/2015/09/01/RCAEMCMC/" data-id="cirwg086v0001o0v2u85wmndj" class="article-share-link" data-share="baidu" data-title="RCAE &amp; MCMC">Share</a>
       
 
       

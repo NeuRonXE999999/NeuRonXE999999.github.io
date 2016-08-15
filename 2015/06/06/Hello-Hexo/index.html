@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/06/06/Hello-Hexo/index.html">
 <meta property="og:site_name" content="neuRonXe's Blog">
 <meta property="og:description" content="最早接触技术类博客是2012年参加第五届R语言会议。看着大神们各种高大上的博客主页，甚是膜拜。随着学习的深入，自己也开始接触了一些如Markdown的写作语言，于是开始尝试着搭建个人写作平台。换了几种博客平台后，最终选定了Hexo：它规避了繁琐的网页制作和发布程序，能够快速生成可以托管在Github上的静态网页，这对于我这种非程序员出身的人来说真的非常适合。这几天花时间折腾了一下，发现Hexo比我">
-<meta property="og:updated_time" content="2016-08-15T20:05:11.203Z">
+<meta property="og:updated_time" content="2016-08-15T20:09:00.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello Hexo">
 <meta name="twitter:description" content="最早接触技术类博客是2012年参加第五届R语言会议。看着大神们各种高大上的博客主页，甚是膜拜。随着学习的深入，自己也开始接触了一些如Markdown的写作语言，于是开始尝试着搭建个人写作平台。换了几种博客平台后，最终选定了Hexo：它规避了繁琐的网页制作和发布程序，能够快速生成可以托管在Github上的静态网页，这对于我这种非程序员出身的人来说真的非常适合。这几天花时间折腾了一下，发现Hexo比我">
@@ -115,7 +115,7 @@
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -<span class="keyword">C</span> <span class="string">"YOUR_EMAIL@YOUREMAIL.COM"</span></span><br></pre></td></tr></table></figure>
 <p>接下来会让你选择生成位置，直接回车就可以。然后填入密码后就会生成<code>id_rsa</code>，<code>id_rsa.pub</code>两个密钥。打开公共的密钥，把所有的代码复制，然后在GitCafe里SSH公钥管理添加新公钥，把复制的公钥拷贝进去。接着用<code>ssh -T git@gitcafe.com</code>来测试连接，连接好后要核对指纹：<code>84:9e:c9:8e:7f:36:28:08:7e:13:bf:43:12:74:11:4e</code>。核对好后输入yes会要求输入密码，不行的话再试一次，输入密码以后就看到成功字样。到此Git部分部署的部分完成。</p>
 <p>现在可以部署Hexo部分。首先打开配置<code>_config.yml</code>，在<code>Deployment</code>里加入:</p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"> <span class="comment">##Docs: http://hexo.io/docs/deployment.html </span></span><br><span class="line">deploy:</span><br><span class="line"> <span class="keyword">type</span>: git</span><br><span class="line"> repo: git<span class="macrocall">@gitcafe</span>.com:neuRon/neuRon.git</span><br><span class="line"> branch: gitcafe-pages</span><br></pre></td></tr></table></figure>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># Deployment</span></span><br><span class="line"><span class="preprocessor">##Docs: http://hexo.io/docs/deployment.html </span></span><br><span class="line"> deploy:</span><br><span class="line">  <span class="typedef"><span class="keyword">type</span>: git</span></span><br><span class="line">  repo: git@gitcafe.com:neuRon/neuRon.git</span><br><span class="line">  branch: gitcafe-pages</span><br></pre></td></tr></table></figure>
 <p>值得注意的是hexo 3.0以后<code>type</code>统一为<code>git</code>。修改好以后，还要安装一下Git：<code>npm install hexo-deployer-git --save</code>。不符合以上要求的很可能出现<code>Deployer not found: github</code>的报错。</p>
 <p>全都修改好以后，就可以<code>hexo g</code>，<code>hexo d</code>部署到GitCafe了，接下来等待一会儿就可以到<code>http://yourname.gitcafe.io/</code>查看发布好的网页了。</p>
 <h3 id="u63D2_u4EF6_u7684_u4F7F_u7528"><a href="#u63D2_u4EF6_u7684_u4F7F_u7528" class="headerlink" title="插件的使用"></a>插件的使用</h3><h4 id="u66F4_u6362_u4E3B_u9898"><a href="#u66F4_u6362_u4E3B_u9898" class="headerlink" title="更换主题"></a>更换主题</h4><p>大部分主题可以在<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">https://github.com/hexojs/hexo/wiki/Themes</a>找到，然后利用<code>git</code>命令复制到本地就可以了。例如，我用的是<a href="http://jasonxiang.com/landscape-plus/" target="_blank" rel="external">Landscape Plus</a>（以下的修改都是基于这个主题），命令就是<code>git clone https://github.com/xiangming/landscape-plus.git themes/landscape-plus</code>。然后在<code>_config.yml</code>里把<code>theme</code>的值设置为<code>landscape-plus</code>。</p>
@@ -128,7 +128,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/06/06/Hello-Hexo/" data-id="cirwgzljl0004ksv2clinesx8" class="article-share-link" data-share="baidu" data-title="Hello Hexo">Share</a>
+        <a data-url="http://yoursite.com/2015/06/06/Hello-Hexo/" data-id="cirwh4e2i000430v2eneo674o" class="article-share-link" data-share="baidu" data-title="Hello Hexo">Share</a>
       
 
       
